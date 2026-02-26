@@ -1,0 +1,274 @@
+/* TASK FORM WRAPPER */
+
+.task-form-container {
+  width: 100%;
+  max-width: 620px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08),
+    0 4px 10px rgba(0, 0, 0, 0.04);
+  animation: fadeIn .3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* HEADER */
+
+.form-header {
+  padding: 22px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+}
+
+.form-header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.btn-close {
+  border: none;
+  background: rgba(255, 255, 255, .15);
+  color: white;
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.btn-close:hover {
+  background: rgba(255, 255, 255, .3);
+}
+
+
+BODY .form-body {
+  padding: 26px;
+}
+
+
+/* LABELS */
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.required {
+  color: #ef4444;
+}
+
+
+/* INPUTS */
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 14px;
+  transition: all .25s ease;
+}
+
+.form-input:hover,
+.form-textarea:hover {
+  border-color: #94a3b8;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  background: white;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+}
+
+/* CRON INPUT STYLE */
+.cron-input {
+  font-family: monospace;
+  letter-spacing: 1px;
+}
+
+
+/* ERROR STATE */
+
+.has-error .form-input,
+.has-error .form-textarea {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.error-messages {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #ef4444;
+}
+
+
+/* CRON PRESET BUTTONS */
+
+.cron-presets {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preset-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.preset-btn {
+  padding: 6px 14px;
+  border-radius: 30px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.preset-btn:hover {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+
+/* CRON TRANSLATION BOX */
+
+.cron-translation {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.translation-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1d4ed8;
+}
+
+
+/* CHECKBOX GROUP */
+
+.checkbox-group {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #334155;
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  width: 18px;
+  height: 18px;
+  accent-color: #2563eb;
+}
+
+
+/* FOOTER */
+
+.form-footer {
+  padding: 20px 26px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #f8fafc;
+}
+
+
+/* BUTTONS */
+
+.btn-primary {
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, .35);
+}
+
+.btn-primary:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background: #f1f5f9;
+}
+
+
+/* MOBILE */
+
+@media(max-width:640px) {
+
+  .task-form-container {
+    border-radius: 0;
+    height: 100vh;
+  }
+
+  .form-footer {
+    flex-direction: column-reverse;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}

@@ -1,0 +1,138 @@
+<div class="task-list-container">
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading tasks...</p>
+  </div>
+
+  <!-- Task Table (Desktop) -->
+  <div class="task-table-wrapper" *ngIf="!isLoading && tasks.length > 0">
+    <table class="task-table">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Task Name</th>
+          <th>Description</th>
+          <th>Cron Expression</th>
+          <th>Schedule</th>
+          <th>Next Run</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks" class="task-row">
+          <!-- Status -->
+          <td>
+            <div class="status-badge" [class.status-active]="task.status === 'active'"
+              [class.status-paused]="task.status === 'paused'">
+              <span class="status-dot"></span>
+              <span class="status-text">{{ task.status }}</span>
+            </div>
+          </td>
+
+          <!-- Task Name -->
+          <td class="task-name-cell">
+            <strong>{{ task.name }}</strong>
+          </td>
+
+          <!-- Description -->
+          <td class="task-description-cell">
+            {{ task.description || '—' }}
+          </td>
+
+          <!-- Cron Expression -->
+          <td>
+            <code class="cron-code">{{ task.cronExpression }}</code>
+          </td>
+
+          <!-- Human Readable Schedule -->
+          <td>
+            <div class="schedule-cell" [title]="task.cronExpression">
+              <span class="schedule-icon">⏰</span>
+              <span class="schedule-text">{{ task.humanReadable }}</span>
+            </div>
+          </td>
+
+          <!-- Next Run -->
+          <td>
+            <span class="next-run">{{ task.nextRun | date:'MMM d, h:mm a' }}</span>
+          </td>
+
+          <!-- Actions -->
+          <td>
+            <div class="action-buttons">
+              <button class="action-btn toggle-btn" [class.active]="task.status === 'active'"
+                [class.paused]="task.status === 'paused'" (click)="toggleStatus(task)"
+                [title]="task.status === 'active' ? 'Pause' : 'Activate'">
+                {{ task.status === 'active' ? '⏸️' : '▶️' }}
+              </button>
+              <button class="action-btn edit-btn" (click)="editTask(task)" title="Edit">
+                ✏️
+              </button>
+              <button class="action-btn delete-btn" (click)="deleteTask(task)" title="Delete">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Task Cards (Mobile) -->
+  <div class="task-cards" *ngIf="!isLoading && tasks.length > 0">
+    <div class="task-card" *ngFor="let task of tasks">
+      <div class="card-header">
+        <div class="status-badge" [class.status-active]="task.status === 'active'"
+          [class.status-paused]="task.status === 'paused'">
+          <span class="status-dot"></span>
+          <span class="status-text">{{ task.status }}</span>
+        </div>
+        <h4 class="card-title">{{ task.name }}</h4>
+      </div>
+
+      <div class="card-body">
+        <p class="card-description">{{ task.description || 'No description' }}</p>
+
+        <div class="card-detail">
+          <span class="detail-label">Cron:</span>
+          <code class="cron-code">{{ task.cronExpression }}</code>
+        </div>
+
+        <div class="card-detail">
+          <span class="detail-label">Schedule:</span>
+          <span class="detail-value">{{ task.humanReadable }}</span>
+        </div>
+
+        <div class="card-detail">
+          <span class="detail-label">Next:</span>
+          <span class="detail-value">{{ task.nextRun | date:'medium' }}</span>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="card-action-btn toggle-card-btn" [class.active]="task.status === 'active'"
+          (click)="toggleStatus(task)">
+          {{ task.status === 'active' ? 'Pause' : 'Activate' }}
+        </button>
+        <button class="card-action-btn edit-card-btn" (click)="editTask(task)">
+          Edit
+        </button>
+        <button class="card-action-btn delete-card-btn" (click)="deleteTask(task)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!isLoading && tasks.length === 0">
+    <div class="empty-icon">📊</div>
+    <h3>No Tasks Found</h3>
+    <p>Get started by creating your first scheduled task.</p>
+    <button class="btn-create" (click)="createNewTask()">
+      <span class="btn-icon">+</span>
+      Create New Task
+    </button>
+  </div>
+</div>
